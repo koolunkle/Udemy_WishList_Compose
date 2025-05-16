@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBarView(
+fun AppBarScreen(
     title: String,
     onBackNavClicked: () -> Unit = {},
 ) {

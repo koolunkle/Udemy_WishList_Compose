@@ -29,7 +29,7 @@ fun HomeScreen() {
     val context = LocalContext.current
     Scaffold(
         topBar = {
-            AppBarView(
+            AppBarScreen(
                 title = "WishList",
                 onBackNavClicked = {
                     Toast.makeText(context, "Button Clicked", Toast.LENGTH_SHORT).show()
