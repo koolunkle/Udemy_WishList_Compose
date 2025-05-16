@@ -23,9 +23,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navController: NavController,
+    viewModel: WishViewModel,
+) {
     val context = LocalContext.current
     Scaffold(
         topBar = {
@@ -38,7 +42,7 @@ fun HomeScreen() {
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {},
+                onClick = { navController.navigate(route = Screen.AddScreen.route) },
                 contentColor = Color.White,
                 containerColor = Color.Black,
                 modifier = Modifier.padding(20.dp)

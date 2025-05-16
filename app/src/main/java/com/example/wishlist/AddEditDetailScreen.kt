@@ -1,12 +1,12 @@
 package com.example.wishlist
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -42,9 +42,9 @@ fun AddEditDetailScreen(
         Column(
             modifier = Modifier
                 .padding(paddingValues)
-                .wrapContentSize(),
+                .fillMaxSize()
+                .background(color = Color.White),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
         ) {
             Spacer(modifier = Modifier.height(10.dp))
             WishTextField(
