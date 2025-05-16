@@ -35,7 +35,8 @@ fun AddEditDetailScreen(
     Scaffold(
         topBar = {
             AppBarScreen(
-                title = if (id != 0L) "Update Wish" else "Add Wish"
+                title = if (id != 0L) "Update Wish" else "Add Wish",
+                onBackNavClicked = { navController.navigateUp() },
             )
         },
     ) { paddingValues ->
@@ -51,12 +52,18 @@ fun AddEditDetailScreen(
                 label = "Title",
                 value = viewModel.wishTitleState,
                 onValueChange = { viewModel.onWishTitleChanged(it) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp),
             )
             Spacer(modifier = Modifier.height(10.dp))
             WishTextField(
                 label = "Description",
                 value = viewModel.wishDescriptionState,
                 onValueChange = { viewModel.onWishDescriptionChanged(it) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp),
             )
             Spacer(modifier = Modifier.height(10.dp))
             Button(
@@ -83,6 +90,7 @@ fun WishTextField(
     label: String,
     value: String,
     onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     OutlinedTextField(
         value = value,
@@ -105,7 +113,7 @@ fun WishTextField(
             focusedLabelColor = colorResource(id = R.color.black),
             unfocusedLabelColor = colorResource(id = R.color.black),
         ),
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier,
     )
 }
 
