@@ -11,7 +11,7 @@ class MainActivity : ComponentActivity() {
         // enableEdgeToEdge()
         setContent {
             WishListTheme {
-                HomeScreen()
+                Navigation()
             }
         }
     }
