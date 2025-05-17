@@ -18,13 +18,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.example.wishlist.data.DummyWish
 import com.example.wishlist.data.Wish
 
 @Composable
@@ -56,13 +57,14 @@ fun HomeScreen(
             }
         }
     ) { paddingValues ->
+        val wishList by viewModel.getAllWishes.collectAsStateWithLifecycle(initialValue = listOf())
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
                 .background(color = Color.White),
         ) {
-            items(DummyWish.wishList) { wish ->
+            items(wishList) { wish ->
                 WishItem(
                     wish = wish,
                     onClick = {},
