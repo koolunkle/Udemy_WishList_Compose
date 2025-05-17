@@ -13,10 +13,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -28,6 +32,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.wishlist.data.Wish
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navController: NavController,
@@ -64,14 +69,42 @@ fun HomeScreen(
                 .padding(paddingValues)
                 .background(color = Color.White),
         ) {
-            items(wishList) { wish ->
-                WishItem(
-                    wish = wish,
-                    onClick = {
-                        val id = wish.id
-                        navController.navigate(route = Screen.AddScreen.route + "/$id")
+            items(
+                items = wishList,
+                key = { it.id },
+            ) { wish ->
+                val dismissState = rememberSwipeToDismissBoxState(
+                    confirmValueChange = {
+                        when (it) {
+                            SwipeToDismissBoxValue.StartToEnd -> {
+                                viewModel.deleteWish(wish)
+                            }
+
+                            SwipeToDismissBoxValue.EndToStart -> {
+                                return@rememberSwipeToDismissBoxState false
+                            }
+
+                            SwipeToDismissBoxValue.Settled -> {
+                                return@rememberSwipeToDismissBoxState false
+                            }
+                        }
+                        return@rememberSwipeToDismissBoxState true
                     },
+                    positionalThreshold = { it * 0.7f }
                 )
+                SwipeToDismissBox(
+                    state = dismissState,
+                    enableDismissFromEndToStart = false,
+                    backgroundContent = {}
+                ) {
+                    WishItem(
+                        wish = wish,
+                        onClick = {
+                            val id = wish.id
+                            navController.navigate(route = Screen.AddScreen.route + "/$id")
+                        },
+                    )
+                }
             }
         }
     }
