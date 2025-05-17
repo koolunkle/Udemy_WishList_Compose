@@ -93,6 +93,14 @@ fun AddEditDetailScreen(
                     if (viewModel.wishTitleState.isNotEmpty() && viewModel.wishDescriptionState.isNotEmpty()) {
                         if (id != 0L) {
                             // Update Wish
+                            viewModel.updateWish(
+                                Wish(
+                                    id = id,
+                                    title = viewModel.wishTitleState.trim(),
+                                    description = viewModel.wishDescriptionState.trim(),
+                                )
+                            )
+                            snackBarMessage.value = "Wish has been updated"
                         } else {
                             // Add Wish
                             viewModel.addWish(
