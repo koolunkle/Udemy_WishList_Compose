@@ -29,6 +29,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.wishlist.data.Wish
 import kotlinx.coroutines.launch
@@ -42,6 +43,16 @@ fun AddEditDetailScreen(
     val snackBarMessage = remember { mutableStateOf("") }
     val snackBarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+    if (id != 0L) {
+        val wish = viewModel.getAllWishesById(id).collectAsStateWithLifecycle(
+            initialValue = Wish(id = 0L, title = "", description = "")
+        )
+        viewModel.wishTitleState = wish.value.title
+        viewModel.wishDescriptionState = wish.value.description
+    } else {
+        viewModel.wishTitleState = ""
+        viewModel.wishDescriptionState = ""
+    }
     Scaffold(
         snackbarHost = { SnackbarHost(snackBarHostState) },
         topBar = {

@@ -45,7 +45,7 @@ fun HomeScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { navController.navigate(route = Screen.AddScreen.route) },
+                onClick = { navController.navigate(route = Screen.AddScreen.route + "/0L") },
                 contentColor = Color.White,
                 containerColor = Color.Black,
                 modifier = Modifier.padding(20.dp)
@@ -67,7 +67,10 @@ fun HomeScreen(
             items(wishList) { wish ->
                 WishItem(
                     wish = wish,
-                    onClick = {},
+                    onClick = {
+                        val id = wish.id
+                        navController.navigate(route = Screen.AddScreen.route + "/$id")
+                    },
                 )
             }
         }
