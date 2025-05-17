@@ -1,4 +1,4 @@
-package com.example.wishlist
+package com.example.wishlist.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

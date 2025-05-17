@@ -24,6 +24,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.wishlist.data.DummyWish
+import com.example.wishlist.data.Wish
 
 @Composable
 fun HomeScreen(
@@ -85,10 +87,12 @@ fun WishItem(
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
                 text = wish.title,
+                color = Color.White,
                 fontWeight = FontWeight.ExtraBold,
             )
             Text(
                 text = wish.description,
+                color = Color.White,
                 fontWeight = FontWeight.ExtraBold,
             )
         }
